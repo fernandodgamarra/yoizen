@@ -8,7 +8,7 @@ ________________________________________________________________________________
 Se adjuntaran si es necesario varios documentos o uno solo unificado.
 
 Contenido
-1.	Introducción
+1.	Introducción (Este documento) README.md.
 2.	Diseño y Despliegue de Infraestructura 
     o	Diagrama de Arquitectura
     o	Configuraciones de Red y Firewall
