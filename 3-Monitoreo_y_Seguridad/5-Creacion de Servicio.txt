@@ -1,0 +1,17 @@
+# Crear archivo de servicio: ini
+
+# /etc/systemd/system/node_exporter.service
+
+[Unit]
+Description=Node Exporter
+After=network.target
+
+[Service]
+User=node_exporter
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=default.target
+
+sudo systemctl daemon-reexec
+sudo systemctl enable --now node_exporter

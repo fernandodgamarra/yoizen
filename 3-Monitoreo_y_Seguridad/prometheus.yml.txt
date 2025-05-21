@@ -1,0 +1,7 @@
+- job_name: 'node_exporter'
+    static_configs:
+      - targets: ['<IP_VM1>:9100', '<IP_VM2>:9100']
+
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['<IP_VM1>:8080']
