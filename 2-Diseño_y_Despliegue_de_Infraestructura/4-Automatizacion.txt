@@ -1,0 +1,9 @@
+Como comente en la entrevista, no tengo experiencia en Ansible y Terraform, pro invertigue ambos y me pareció mas claro la sintaxis de Terraform, por lo que me volcare por este último.
+Se adjunta en esta carpeta el archivo main.tf
+
+Los comandos que se ejecutaran, son los especificados a continuación.
+
+terraform init
+terraform validate
+terraform plan
+terraform apply

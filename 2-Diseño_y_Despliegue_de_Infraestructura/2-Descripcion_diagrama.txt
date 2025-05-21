@@ -1,0 +1,10 @@
+Descripción del Diagrama:
+
+•	VM1 (Aplicación): [Sistema Operativo, Ubuntu Server 22.04]. Aloja el servicio web en un contenedor Docker.
+•	VM2 (Base de Datos): [Sistema Operativo, Oracle Linux]. Aloja la base de datos.
+•	Servicio Web: [Nombre del servicio, Apache] ejecutándose en un contenedor Docker en VM1.
+•	Base de Datos: [Tipo de DB, MySQL] instalada en VM2.
+•	Red Virtual (VNet/VPC): Engloba a todas las VMs.
+•	Subred de Aplicación: [Rango IP, e.g., 10.0.1.0/24] para VM1.
+•	Subred de Base de Datos: [Rango IP, e.g., 10.0.2.0/24] para VM2.
+•	Firewalls/NSGs (Network Security Group): Aplicados a nivel de subred o interfaz de red para controlar el tráfico.

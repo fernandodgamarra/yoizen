@@ -1,0 +1,37 @@
+Configuraciones de Red y Firewall en Azure
+
+• Segmentación de Red (VNet y Subredes)
+
+Red Virtual (VNet): Contenedor lógico que agrupa los recursos de red.
+Subred de Aplicación: 10.0.1.0/24. Aloja la VM1 con el servicio web ( Apache en Docker sobre Ubuntu Server).
+Subred de Base de Datos: 10.0.2.0/24. Aloja la VM2 con la base de datos (ej. MySQL sobre Oracle Linux).
+
+Justificación: Esta segmentación permite un aislamiento lógico de los componentes y la aplicación de reglas de seguridad específicas mediante Network Security Groups (NSGs).
+
+• Network Security Groups (NSGs)
+
+NSG para la Subred o NIC de la VM de Aplicación (VM1)
+Reglas de entrada (Inbound):
+Puerto 22 (SSH) / 3389 (RDP): Permitido solo desde la IP o red de administración (ej. 203.0.113.10/32).
+Puertos 80/443 (HTTP/HTTPS):
+Si la aplicación es pública: permitido desde Internet (0.0.0.0/0).
+Si es interna: permitido solo desde el Azure Load Balancer o IPs privadas autorizadas.
+Reglas de salida (Outbound):
+Puerto 3306 (MySQL): Permitido hacia la IP privada de la VM de base de datos (10.0.2.4).
+Puerto 22 / 3389: Permitido hacia la red de administración.
+Acceso a Internet: Permitido para actualizaciones del sistema y descarga de paquetes desde repositorios oficiales.
+
+NSG para la Subred o NIC de la VM de Base de Datos (VM2)
+Reglas de entrada (Inbound):
+Puerto 22 / 3389: Permitido solo desde la red de administración.
+Puerto 3306 (MySQL): Permitido solo desde el rango IP de la Subred de Aplicación (10.0.1.0/24).
+Reglas de salida (Outbound):
+Restringido al mínimo necesario (por ejemplo, salida a Internet únicamente para actualizaciones de seguridad, si se justifica).
+
+Justificación: Se sigue el principio de mínimo privilegio, permitiendo únicamente el tráfico esencial para el funcionamiento y la gestión segura de la solución.
+
+• Resolución de Nombres (DNS Interno)
+Se utilizará el DNS interno de Azure proporcionado por la VNet para la resolución de nombres internos.
+Ejemplo de nombres: app-vm.internal.cloudapp.net, db-vm.internal.cloudapp.net.
+Alternativamente, se puede implementar un Azure Private DNS Zone  internal.local enlazada a la VNet.
+Ventaja: La comunicación entre VMs se gestiona por nombres, facilitando la administración, el troubleshooting y la portabilidad.
